@@ -1,0 +1,164 @@
+@import 'tailwindcss';
+@import 'tw-animate-css';
+@custom-variant dark (&:is(.dark *));
+
+:root {
+  --background: oklch(1 0 0);
+  --foreground: oklch(0.2 0.02 240);
+  --card: oklch(1 0 0);
+  --card-foreground: oklch(0.2 0.02 240);
+  --popover: oklch(1 0 0);
+  --popover-foreground: oklch(0.2 0.02 240);
+  --primary: oklch(0.5 0.15 240);
+  --primary-foreground: oklch(1 0 0);
+  --secondary: oklch(0.97 0.01 240);
+  --secondary-foreground: oklch(0.3 0.02 240);
+  --muted: oklch(0.97 0.01 240);
+  --muted-foreground: oklch(0.45 0.03 240);
+  --accent: oklch(0.9 0.02 240);
+  --accent-foreground: oklch(0.2 0.02 240);
+  --destructive: oklch(0.5 0.18 20);
+  --destructive-foreground: oklch(1 0 0);
+  --border: oklch(0.9 0.01 240);
+  --input: oklch(0.9 0.01 240);
+  --ring: oklch(0.5 0.15 240);
+  --chart-1: oklch(0.5 0.15 240);
+  --chart-2: oklch(0.6 0.12 240);
+  --chart-3: oklch(0.4 0.08 240);
+  --chart-4: oklch(0.7 0.15 200);
+  --chart-5: oklch(0.8 0.15 160);
+  --radius: 0.5rem;
+  --sidebar: oklch(0.98 0.01 240);
+  --sidebar-foreground: oklch(0.2 0.02 240);
+  --sidebar-primary: oklch(0.5 0.15 240);
+  --sidebar-primary-foreground: oklch(1 0 0);
+  --sidebar-accent: oklch(0.95 0.02 240);
+  --sidebar-accent-foreground: oklch(0.2 0.02 240);
+  --sidebar-border: oklch(0.92 0.01 240);
+  --sidebar-ring: oklch(0.5 0.15 240);
+}
+
+@theme inline {
+  --font-sans: var(--font-sans), system-ui, sans-serif;
+  --font-heading: var(--font-sans), system-ui, sans-serif;
+  --font-mono: 'JetBrains Mono', monospace;
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --radius-sm: calc(var(--radius) - 2px);
+  --radius-md: var(--radius);
+  --radius-lg: calc(var(--radius) + 2px);
+  --color-sidebar: var(--sidebar);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-ring: var(--sidebar-ring);
+  --animate-accordion-down: accordion-down 0.2s ease-out;
+  --animate-accordion-up: accordion-up 0.2s ease-out;
+
+  @keyframes accordion-down {
+    from { height: 0; }
+    to { height: var(--radix-accordion-content-height); }
+  }
+
+  @keyframes accordion-up {
+    from { height: var(--radix-accordion-content-height); }
+    to { height: 0; }
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+    font-feature-settings: "cv02", "cv03", "cv04", "cv11";
+  }
+}
+
+/* ─── Modern SaaS Card ───────────────────────────────────────────── */
+.saas-card {
+  @apply bg-card border border-border shadow-[0_1px_3px_rgba(0,0,0,0.05),0_1px_2px_rgba(0,0,0,0.06)] rounded-lg transition-all duration-300;
+}
+
+.saas-card:hover {
+  @apply shadow-[0_10px_15px_-3px_rgba(0,0,0,0.1),0_4px_6px_-2px_rgba(0,0,0,0.05)] border-primary/20 -translate-y-0.5;
+}
+
+/* ─── Glass Header Utility ────────────────────────────────────────── */
+.glass-header {
+  @apply bg-white/70 backdrop-blur-md border-b border-border sticky top-0 z-40 transition-all duration-300;
+}
+
+/* ─── Modern Action Button ────────────────────────────────────────── */
+.action-button {
+  @apply bg-primary text-primary-foreground font-semibold py-2 px-6 rounded-md shadow-sm hover:bg-primary/90 transition-all active:scale-[0.98];
+}
+
+/* ─── Subtle Section Background ───────────────────────────────────── */
+.subtle-section {
+  @apply bg-secondary/50 border-y border-border;
+}
+
+/* ─── Typography Utils ────────────────────────────────────────────── */
+.heading-display {
+  @apply font-heading font-extrabold tracking-tight text-foreground leading-[1.1];
+}
+
+.hero-heading {
+  @apply font-heading font-black tracking-tighter text-foreground leading-[0.95] text-balance;
+}
+
+.sub-heading {
+  @apply font-heading font-bold tracking-tight text-foreground leading-tight;
+}
+
+/* ─── Markdown Content (SaaS Style) ───────────────────────────────── */
+.markdown-content {
+  @apply text-foreground space-y-4;
+}
+
+.markdown-content p {
+  @apply leading-7 text-foreground font-medium;
+}
+
+.markdown-content h1, .markdown-content h2, .markdown-content h3 {
+  @apply font-bold text-foreground tracking-tight border-b border-border pb-2 mt-8 mb-4;
+}
+
+.markdown-content ul {
+  @apply list-disc pl-6 space-y-2;
+}
+
+.markdown-content li {
+  @apply text-foreground font-medium;
+}
+
+.markdown-content code {
+  @apply bg-muted px-1.5 py-0.5 rounded text-sm font-mono text-primary;
+}
+
+.markdown-content pre {
+  @apply p-4 rounded-md bg-secondary border border-border overflow-x-auto;
+}
