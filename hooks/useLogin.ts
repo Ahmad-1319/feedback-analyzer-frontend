@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useAuth } from "@/context/AuthContext";
+import { useAuth } from "@/hooks/useAuth";
 import type { UserLogin } from "@/types/auth";
 interface UseLoginReturn {
     login: (data: UserLogin) => Promise<void>;

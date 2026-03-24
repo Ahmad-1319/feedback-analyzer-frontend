@@ -47,7 +47,7 @@ export const viewport = {
   themeColor: "#030712",
 };
 
-import { AuthProvider } from "@/context/AuthContext";
+import StoreProvider from "@/components/providers/StoreProvider";
 import { LogoutModalWrapper } from "@/components/ui/logout-modal-wrapper";
 
 export default function RootLayout({
@@ -60,7 +60,7 @@ export default function RootLayout({
       <body
         className={`${spaceGrotesk.variable} ${plusJakartaSans.variable} font-sans antialiased bg-background text-foreground transition-colors duration-300`}
       >
-        <AuthProvider>
+        <StoreProvider>
           <LogoutModalWrapper />
           {children}
           <Toaster
@@ -90,7 +90,7 @@ export default function RootLayout({
               },
             }}
           />
-        </AuthProvider>
+        </StoreProvider>
         <Analytics />
       </body>
     </html>

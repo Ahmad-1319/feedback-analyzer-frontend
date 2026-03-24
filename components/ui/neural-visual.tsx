@@ -6,10 +6,10 @@ import { motion } from "framer-motion";
 export function NeuralVisual() {
   return (
     <div className="relative w-full h-full bg-white/5 overflow-hidden flex items-center justify-center">
-      {/* Background Grid */}
+
       <div className="absolute inset-0 bg-[linear-gradient(rgba(59,130,246,0.05)_1px,transparent_1px),linear-gradient(90deg,rgba(59,130,246,0.05)_1px,transparent_1px)] bg-[size:40px_40px] [mask-image:radial-gradient(ellipse_at_center,black,transparent_80%)]" />
 
-      {/* Central Core */}
+
       <div className="relative z-10">
         <motion.div
           animate={{
@@ -32,7 +32,7 @@ export function NeuralVisual() {
             <div className="h-4 w-4 rounded-full bg-primary shadow-[0_0_20px_rgba(59,130,246,0.5)]" />
           </div>
 
-          {/* Data Nodes */}
+
           {[...Array(8)].map((_, i) => (
             <motion.div
               key={i}
@@ -54,7 +54,7 @@ export function NeuralVisual() {
         </div>
       </div>
 
-      {/* Floating Particles */}
+
       {[...Array(20)].map((_, i) => (
         <motion.div
           key={`p-${i}`}

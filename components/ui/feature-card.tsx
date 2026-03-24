@@ -29,12 +29,12 @@ export function FeatureCard({
       )}
       {...props}
     >
-      {/* Animated Grid Pattern */}
+
       <div className="absolute inset-0 z-0 opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none">
         <div className="absolute inset-0 bg-[linear-gradient(to_right,rgba(59,130,246,0.05)_1px,transparent_1px),linear-gradient(to_bottom,rgba(59,130,246,0.05)_1px,transparent_1px)] bg-[size:40px_40px] [mask-image:radial-gradient(ellipse_at_center,black,transparent_80%)]" />
       </div>
 
-      {/* Glowing Corner */}
+
       <div className="absolute -top-12 -right-12 w-24 h-24 bg-primary/10 blur-[40px] rounded-full group-hover:scale-150 transition-transform duration-700" />
 
       <div className="relative z-10">

@@ -61,7 +61,7 @@ export default function FeaturesPage() {
       </header>
 
       <main className="flex-1 pt-32 pb-24">
-        {/* Features Hero */}
+
         <section className="relative py-24 lg:py-32 overflow-hidden">
           <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-[800px] aurora-bg opacity-20 pointer-events-none" />
           <div className="container mx-auto px-6 relative z-10 text-center">
@@ -82,7 +82,7 @@ export default function FeaturesPage() {
           </div>
         </section>
 
-        {/* Grid Features */}
+
         <section className="py-24 relative overflow-hidden">
           <div className="container mx-auto px-6 relative z-10">
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
@@ -117,7 +117,7 @@ export default function FeaturesPage() {
           </div>
         </section>
 
-        {/* Comparison Section */}
+
         <section className="py-32 bg-black/40 relative z-10 border-y border-white/5">
           <div className="container mx-auto px-6">
             <div className="mb-20 text-center">
@@ -195,7 +195,7 @@ export default function FeaturesPage() {
           </div>
         </section>
 
-        {/* Final CTA */}
+
         <section className="py-48 relative overflow-hidden">
           <div className="absolute inset-0 bg-gradient-to-b from-[#030712] via-cyan-500/5 to-[#030712]" />
           <div className="container mx-auto px-6 relative z-10 text-center">

@@ -45,7 +45,7 @@ export default function ChatSection() {
 
   return (
     <div className="flex h-full bg-white rounded-md border border-border overflow-hidden shadow-sm relative">
-      {/* Mobile Toggle Button (Nexus Style) */}
+
       <button
         onClick={() => setSidebarVisible(!sidebarVisible)}
         className="lg:hidden absolute top-4 left-4 z-[80] p-2 rounded-md bg-secondary border border-border text-foreground"
@@ -57,7 +57,7 @@ export default function ChatSection() {
         )}
       </button>
 
-      {/* History Sidebar */}
+
       <aside
         className={cn(
           "absolute lg:relative z-[70] h-full w-72 bg-white border-r border-border flex flex-col transition-transform duration-300",
@@ -125,7 +125,7 @@ export default function ChatSection() {
         </div>
       </aside>
 
-      {/* Main Chat Interface */}
+
       <main className="flex-1 flex flex-col relative overflow-hidden h-full bg-secondary/10">
 
         <div className="flex-1 overflow-y-auto px-6 py-8 space-y-8 custom-scrollbar">
@@ -182,7 +182,7 @@ export default function ChatSection() {
                       <p className="font-medium text-white">{message.text}</p>
                     )}
 
-                    {/* Quick Actions */}
+
                     <div
                       className={cn(
                         "absolute -bottom-8 flex gap-2 opacity-0 group-hover/msg:opacity-100 transition-opacity duration-300",
@@ -234,7 +234,7 @@ export default function ChatSection() {
           )}
         </div>
 
-        {/* Input Area */}
+
         <div className="p-4 border-t border-border bg-white">
           <form
             onSubmit={handleSendMessage}

@@ -1,34 +1,28 @@
 "use client";
-import React, {
-  createContext,
-  useContext,
-  useState,
-  useEffect,
-  useCallback,
-} from "react";
+
+import { useEffect, useCallback } from "react";
 import { toast } from "react-hot-toast";
 import { useRouter, usePathname } from "next/navigation";
 import { API_ENDPOINTS } from "@/lib/api-config";
-import type { UserResponse, Token, UserLogin, UserSignup } from "@/types/auth";
-interface AuthContextType {
-  user: UserResponse | null;
-  isAuthenticated: boolean;
-  isLoading: boolean;
-  login: (credentials: UserLogin) => Promise<void>;
-  signup: (data: UserSignup) => Promise<void>;
-  logout: () => void;
-  confirmLogout: () => void;
-  isLogoutModalOpen: boolean;
-  closeLogoutModal: () => void;
-}
-const AuthContext = createContext<AuthContextType | undefined>(undefined);
+import type { UserLogin, UserSignup, Token } from "@/types/auth";
+import { useAppDispatch, useAppSelector } from "@/redux/hooks";
+import {
+  setUser,
+  setIsLoading,
+  openLogoutModal,
+  closeLogoutModal,
+  clearUser,
+} from "@/redux/slices/auth/authSlice";
 
-export function AuthProvider({ children }: { children: React.ReactNode }) {
-  const [user, setUser] = useState<UserResponse | null>(null);
-  const [isLoading, setIsLoading] = useState(true);
-  const [isLogoutModalOpen, setIsLogoutModalOpen] = useState(false);
+export function useAuth() {
+  const dispatch = useAppDispatch();
+  const { user, isAuthenticated, isLoading, isLogoutModalOpen } = useAppSelector(
+    (state) => state.auth
+  );
+  
   const router = useRouter();
   const pathname = usePathname();
+
   const fetchCurrentUser = useCallback(async (token: string) => {
     try {
       const response = await fetch(API_ENDPOINTS.AUTH.ME, {
@@ -38,27 +32,30 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
       });
       if (response.ok) {
         const userData = await response.json();
-        setUser(userData);
+        dispatch(setUser(userData));
       } else {
         localStorage.removeItem("access_token");
-        setUser(null);
+        dispatch(setUser(null));
       }
     } catch (error) {
       console.error("Failed to fetch user:", error);
       localStorage.removeItem("access_token");
-      setUser(null);
+      dispatch(setUser(null));
     } finally {
-      setIsLoading(false);
+      dispatch(setIsLoading(false));
     }
-  }, []);
+  }, [dispatch]);
+
+
   useEffect(() => {
-    const token = localStorage.getItem("access_token");
+    const token = typeof window !== "undefined" ? localStorage.getItem("access_token") : null;
     if (token) {
       fetchCurrentUser(token);
     } else {
-      setIsLoading(false);
+      dispatch(setIsLoading(false));
     }
-  }, [fetchCurrentUser]);
+  }, [fetchCurrentUser, dispatch]);
+
 
   useEffect(() => {
     if (isLoading) return;
@@ -87,6 +84,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     toast.success("Secure link established. Welcome back, Agent.");
     router.push("/dashboard");
   };
+
   const signup = async (signupData: UserSignup) => {
     const response = await fetch(API_ENDPOINTS.AUTH.SIGNUP, {
       method: "POST",
@@ -100,46 +98,30 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     toast.success("Agent profile initialized. Please sign in.");
     router.push("/login");
   };
+
   const logout = () => {
-    setIsLogoutModalOpen(true);
+    dispatch(openLogoutModal());
   };
+
   const confirmLogout = () => {
     localStorage.removeItem("access_token");
-    setUser(null);
-    setIsLogoutModalOpen(false);
+    dispatch(clearUser());
+    dispatch(closeLogoutModal());
     toast.success("Session terminated. Node offline.");
     router.push("/");
   };
-  const closeLogoutModal = () => setIsLogoutModalOpen(false);
-  return (
-    <AuthContext.Provider
-      value={{
-        user,
-        isAuthenticated: !!user,
-        isLoading,
-        login,
-        signup,
-        logout,
-        confirmLogout,
-        isLogoutModalOpen,
-        closeLogoutModal,
-      }}
-    >
-      {isLoading ? (
-        <div className="flex h-screen w-screen items-center justify-center bg-black">
-          <div className="h-8 w-8 animate-spin rounded-full border-2 border-white border-t-transparent"></div>
-        </div>
-      ) : (
-        children
-      )}
-    </AuthContext.Provider>
-  );
-}
 
-export const useAuth = () => {
-  const context = useContext(AuthContext);
-  if (context === undefined) {
-    throw new Error("useAuth must be used within an AuthProvider");
-  }
-  return context;
-};
+  const handleCloseLogoutModal = () => dispatch(closeLogoutModal());
+
+  return {
+    user,
+    isAuthenticated,
+    isLoading,
+    login,
+    signup,
+    logout,
+    confirmLogout,
+    isLogoutModalOpen,
+    closeLogoutModal: handleCloseLogoutModal,
+  };
+}

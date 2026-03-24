@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useAuth } from "@/context/AuthContext";
+import { useAuth } from "@/hooks/useAuth";
 import type { SignupFormData } from "@/lib/validations/auth";
 interface UseSignupReturn {
     signup: (data: SignupFormData) => Promise<void>;

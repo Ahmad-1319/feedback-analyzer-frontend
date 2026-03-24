@@ -51,7 +51,7 @@ export default function DashboardPage() {
   return (
     <div className="flex h-screen bg-secondary/20 text-foreground font-sans overflow-hidden">
 
-      {/* Sidebar Overlay for Mobile */}
+
       <div
         className={cn(
           "fixed inset-0 bg-black/60 backdrop-blur-sm z-[60] lg:hidden transition-opacity duration-300",
@@ -60,7 +60,7 @@ export default function DashboardPage() {
         onClick={toggleSidebar}
       />
 
-      {/* Sidebar */}
+
       <aside
         className={cn(
           "fixed top-0 left-0 z-50 h-full bg-white border-r border-border transition-all duration-300 ease-in-out flex flex-col overflow-hidden",
@@ -153,7 +153,7 @@ export default function DashboardPage() {
         </div>
       </aside>
 
-      {/* Main Content */}
+
       <main
         className={cn(
           "flex-1 flex flex-col min-h-screen transition-all duration-300 ease-in-out pt-16",
@@ -186,7 +186,7 @@ export default function DashboardPage() {
           </div>
         </header>
 
-        {/* Dynamic Content */}
+
         <div className="flex-1 overflow-y-auto relative p-8">
           <AnimatePresence mode="wait">
             {activeTab === "analytics" && (
@@ -324,7 +324,7 @@ function AnalyticsView({
 
   return (
     <div className="space-y-8 pb-12">
-      {/* Stats Grid */}
+
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
         {stats.map((stat, i) => (
           <Card key={i} className="saas-card shadow-sm">
@@ -344,7 +344,7 @@ function AnalyticsView({
       </div>
 
       <div className="grid grid-cols-1 lg:grid-cols-5 gap-8">
-        {/* Sentiment Distribution */}
+
         <Card className="lg:col-span-2 saas-card">
           <CardHeader>
             <CardTitle className="text-lg font-bold">
@@ -401,7 +401,7 @@ function AnalyticsView({
           </div>
         </Card>
 
-        {/* Theme Analytics */}
+
         <Card className="lg:col-span-3 saas-card overflow-hidden">
           <CardHeader>
             <CardTitle className="text-lg font-bold">
@@ -444,7 +444,7 @@ function AnalyticsView({
         </Card>
       </div>
 
-      {/* Historical Trend */}
+
       {historicalData && historicalData.length > 0 && (
         <Card className="saas-card p-6">
           <CardHeader className="px-0">
@@ -474,7 +474,7 @@ function AnalyticsView({
         </Card>
       )}
 
-      {/* Actionable Insights Preview */}
+
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
         <Card className="saas-card border-l-4 border-l-primary">
           <CardContent className="pt-6">

@@ -1,6 +1,6 @@
 "use client";
 
-import { useAuth } from "@/context/AuthContext";
+import { useAuth } from "@/hooks/useAuth";
 import { LogoutModal } from "@/components/ui/logout-modal";
 
 export function LogoutModalWrapper() {
